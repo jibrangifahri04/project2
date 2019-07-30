@@ -56,7 +56,7 @@ include "config.php"
                     </li>
                     
                      <li>
-                        <a href="tabel_peringkat.php" class="active-menu"><i class="fa fa-table"></i>Peringkta</a>
+                        <a href="tabel_peringkat.php" class="active-menu"><i class="fa fa-table"></i>Peringkat</a>
                     </li>
                     
                       <li>
