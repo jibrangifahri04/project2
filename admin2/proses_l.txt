@@ -1,0 +1,73 @@
+<?php
+include 'koneksi.php';
+ 
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+ 
+    if ($role == "admin" ) {
+        $a = "SELECT * FROM admin WHERE username='$username' AND password='$password'";
+        $b = mysqli_query ($kon,$a);
+       
+        if ($b->num_rows >0) {
+            $c = mysqli_fetch_array($b);
+            session_start();
+            $_SESSION['idadmin'] =$c['idadmin'];
+            $_SESSION['username'] =$c['username'];
+            $_SESSION['role'] =$role;
+           
+            // echo $role;
+            header("location:homeadmin.php");
+            die();
+        }
+        else{
+            echo "gagal";
+        }
+ 
+    }elseif($role == "guru" ){
+       
+        $v = "SELECT * FROM guru WHERE nuptk='$username' AND password='$password'";
+        $d = mysqli_query ($kon,$v);
+            if ($d->num_rows >0) {
+            $c = mysqli_fetch_array($d);
+            session_start();
+            $_SESSION['nuptk'] =$c['nuptk'];
+            $_SESSION['nama'] =$c['nama'];
+            $_SESSION['role'] =$role;
+            header("location:homeguru.php");
+            die();
+        }
+        else{
+            echo "gagal";
+        }
+ 
+    }elseif($role == "alumni" ){
+       
+        $a = "SELECT * FROM alumni WHERE nisn='$username' AND password='$password'";
+        $f = mysqli_query ($kon,$a);
+            if ($f->num_rows >0) {
+            $c = mysqli_fetch_array($f);
+            session_start();
+            $_SESSION['nisn'] =$c['nisn'];
+            $_SESSION['nama'] =$c['nama'];
+            $_SESSION['role'] =$role;
+            echo "<script type='text/javascript'>alert('Anda Berhasil Login !! ');</script>";
+            echo "<meta http-equiv='refresh' content='0; homealumni.php?halaman=alumni_profil'>";
+            die();
+        }
+        else{
+            echo "<script type='text/javascript'>alert('Gagal Masuk Silahkan Login Lagi !!');</script>";
+            echo "<meta http-equiv='refresh' content='0; index.php'>";
+        }
+    }
+    else {
+        echo "Username / Password Salah !";
+    }
+ 
+ 
+}
+ 
+ 
+ 
+  ?>
